@@ -50,7 +50,7 @@
                            echo "<td>{$user_role}</td>";
                           
                            echo "<td><a href='user.php?source=edit_user&u_id={$user_id}'>Edit</a></td>";
-                           echo "<td><a href='user.php?delete={$user_id}'>Delete</a></td>";
+                           echo "<td><a  href='user.php?delete={$user_id}'>Delete</a></td>";
                            echo "</tr>";
                           }
         

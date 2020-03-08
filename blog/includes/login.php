@@ -30,6 +30,8 @@ while($row = mysqli_fetch_assoc($login_query))
 
 }
 
+
+$password=crypt($password,$user_password);
 if($username == $db_username && $password == $user_password && $user_role === 'admin'){
 header("Location: ../admin");
 

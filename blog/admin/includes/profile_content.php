@@ -9,13 +9,15 @@ if(isset($_SESSION['user_id'])){
     while($row=mysqli_fetch_assoc($edit_user)){
       $username=$row['username'];
       $user_password=$row['user_password'];
+
+      
       $user_firstname=$row['user_firstname'];
       $user_lastname=$row['user_lastname'];
       $user_email=$row['user_email'];
       $user_role=$row['user_role'];
       $user_image=$row['user_image'];
       
-    
+      
 
     }
 }
@@ -77,8 +79,19 @@ if(isset($_SESSION['user_id'])){
 <label for="post_tags">Role</label>
 
 <select name="role" >
-<option value="admin">Admin</option>
-<option value="subscriber">Subscriber</option>
+<option value=<?php echo $user_role;?>><?php echo $user_role;?></option>
+<?php 
+
+if($user_role==="admin"){
+echo "<option value='subscriber'>subscriber</option>";
+}
+else{
+echo "<option value='admin'>admin</option>";
+}
+
+?>
+
+
 
 
 </select>
@@ -130,7 +143,7 @@ if(isset($_POST["update_user"])){
     
     
     $update_user=mysqli_query($connection,$query);
-    
+    header("location:../admin/profile.php");
     if(!$update_user){
         die('QUERY FAILED'.mysqli_error($connection));
       }

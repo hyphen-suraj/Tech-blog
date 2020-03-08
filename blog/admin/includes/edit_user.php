@@ -77,9 +77,17 @@ if(isset($_GET['u_id'])){
 <label for="post_tags">Role</label>
 
 <select name="role" >
-<option value="admin">Admin</option>
-<option value="subscriber">Subscriber</option>
+<option value=<?php echo $user_role;?>><?php echo $user_role;?></option>
+<?php 
 
+if($user_role==="admin"){
+echo "<option value='subscriber'>subscriber</option>";
+}
+else{
+echo "<option value='admin'>admin</option>";
+}
+
+?>
 
 </select>
 </div>
@@ -106,9 +114,21 @@ if(isset($_POST["update_user"])){
     $user_email=$_POST["email"];
     $user_image=$_FILES["image"]["name"];
     $user_image_temp=$_FILES["image"]["tmp_name"];
-    
-    
     $user_role=$_POST["role"];
+
+
+
+
+  $query="SELECT rant_solt FROM users ";
+$salt_query=mysqli_query($connection,$query);
+if(!$salt_query){
+    die("QUERY FAILED ".mysqli_error($connection));
+}
+$row=mysqli_fetch_assoc($salt_query);
+$salt=$row['rant_solt'];
+$password=crypt($user_password,$salt);
+    
+    
    
     
     
@@ -125,11 +145,13 @@ if(isset($_POST["update_user"])){
 
     }
 
-    $query="UPDATE users SET username = '{$username}',user_password = '{$user_password}',user_firstname = '{$user_firstname}',user_lastname =  '{$user_lastname}', ";
+    $query="UPDATE users SET username = '{$username}',user_password = '{$password}',user_firstname = '{$user_firstname}',user_lastname =  '{$user_lastname}', ";
     $query .="user_email = '{$user_email}',user_image = '{$user_image}',user_role = '{$user_role}'  WHERE user_id = {$edit_user_id} ";
     
     
     $update_user=mysqli_query($connection,$query);
+
+    header("location:../admin/user.php?source=edit_user&u_id=$edit_user_id");
     
     if(!$update_user){
         die('QUERY FAILED'.mysqli_error($connection));

@@ -27,6 +27,7 @@ echo "<li class='nav-item active'><a href='admin/posts.php?source=edit_post&p_id
 
 
 <li class='nav-item active'><a href="admin" class='nav-link'>Admin</a></li>
+<li class='nav-item active'><a href="registration.php" class='nav-link'>Register</a></li>
         <?php 
         $query= "SELECT * FROM categories";
         $cat_list=mysqli_query($connection,$query);
