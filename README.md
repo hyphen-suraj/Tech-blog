@@ -1,4 +1,6 @@
 # Tech-blog
+* It is a blogging website
+* A complete content management system through admin panel
 
 <img src="screenshot/1.png"/>
 <img src="screenshot/2.png"/>
