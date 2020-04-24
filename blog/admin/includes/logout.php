@@ -7,7 +7,7 @@ $_SESSION['lastname'] = NULL;
 $_SESSION['role'] = NULL;
 $_SESSION['user_id'] = NULL;
 
-header("Location: ../index.php");
+header("Location: ../../index.php");
 
 
 ?>

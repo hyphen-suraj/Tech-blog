@@ -12,7 +12,14 @@ $user_image_temp=$_FILES["image"]["tmp_name"];
 
 $role=$_POST["role"];
 
-
+$query="SELECT rant_solt FROM users ";
+$salt_query=mysqli_query($connection,$query);
+if(!$salt_query){
+    die("QUERY FAILED ".mysqli_error($connection));
+}
+$row=mysqli_fetch_assoc($salt_query);
+$salt=$row['rant_solt'];
+$password=crypt($password,$salt);
 
 
 move_uploaded_file($user_image_temp,dirname(__FILE__)."\..\..\userImages\\".$user_image);
